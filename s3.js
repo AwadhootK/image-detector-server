@@ -10,9 +10,7 @@ const secretAccessKey = process.env.AWS_BUCKET_SECRET_ACCESS_KEY
 process.env.AWS_SDK_LOAD_CONFIG = 1;
 
 const s3 = new S3({
-    region,
-    accessKeyID,
-    secretAccessKey
+    region
 });
 
 function uploadFile(file) {
