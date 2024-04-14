@@ -7,20 +7,16 @@ const bucketName = process.env.AWS_BUCKET_NAME
 const accessKeyID = process.env.AWS_BUCKET_ACCESS_KEY_ID
 const secretAccessKey = process.env.AWS_BUCKET_SECRET_ACCESS_KEY
 
-process.env.AWS_SDK_LOAD_CONFIG = 1;
-
 const s3 = new S3({
-    region
+    region, accessKeyID, secretAccessKey
 });
 
 function uploadFile(file) {
-    // file is multer object
-    const fileStream = fs.createReadStream(file.path);
 
     const uploadParams = {
         Bucket: bucketName,
-        Body: fileStream,
-        Key: file.filename
+        Body: file.buffer,
+        Key: file.originalname
     }
 
     return s3.upload(uploadParams).promise();
