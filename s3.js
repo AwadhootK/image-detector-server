@@ -2,10 +2,10 @@ const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 require('dotenv').config();
 
-const region = process.env.AWS_BUCKET_REGION
-const bucketName = process.env.AWS_BUCKET_NAME
-const accessKeyID = process.env.AWS_BUCKET_ACCESS_KEY_ID
-const secretAccessKey = process.env.AWS_BUCKET_SECRET_ACCESS_KEY
+const region = "ap-south-1"
+const bucketName = "awadhoot-image-detector"
+const accessKeyID = 'AKIAVNULFPIV5AFEIMD2'
+const secretAccessKey = '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'
 
 const s3 = new S3({
     region,
