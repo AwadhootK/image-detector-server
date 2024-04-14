@@ -3,9 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
-const cors = require('cors'); 
-
+const cors = require('cors');
 const { uploadFile } = require('./s3.js');
 
 const app = express();
@@ -13,15 +11,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-// Set up multer storage for storing uploaded files
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'images');
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
+// Set up multer storage for storing uploaded files in memory
+const storage = multer.memoryStorage();
 
 app.get('/ping', (req, res) => res.status(200).send('Pong!'));
 
@@ -44,12 +35,6 @@ app.post('/upload-image', upload.single('image'), async (req, res) => {
     // File uploaded successfully
     return res.status(200).send('File uploaded successfully.');
 });
-
-// Create images directory if it doesn't exist
-const imagesDir = path.join(__dirname, 'images');
-if (!fs.existsSync(imagesDir)) {
-    fs.mkdirSync(imagesDir);
-}
 
 // Start the server
 app.listen(PORT, () => {
