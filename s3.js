@@ -7,6 +7,8 @@ const bucketName = process.env.AWS_BUCKET_NAME
 const accessKeyID = process.env.AWS_BUCKET_ACCESS_KEY_ID
 const secretAccessKey = process.env.AWS_BUCKET_SECRET_ACCESS_KEY
 
+process.env.AWS_SDK_LOAD_CONFIG = 1;
+
 const s3 = new S3({
     region,
     accessKeyID,
