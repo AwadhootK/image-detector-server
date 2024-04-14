@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const cors = require('cors');
+const cors = require('cors'); 
 
 const { uploadFile } = require('./s3.js');
 
